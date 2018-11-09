@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siyueli.platform.service.member.server.mapper.region.RegionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.siyueli.platform.member.pojo.region.Region">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="parent_id" property="parentId" />
+        <result column="zip" property="zip" />
+        <result column="sort" property="sort" />
+    </resultMap>
+
+    <select id="selectByRegionId" resultMap="BaseResultMap">
+        SELECT * FROM region
+        <where>id IN (
+            <foreach collection="regionIds" index="index" item="id" separator=",">
+                #{id}
+            </foreach>
+            )
+        </where>
+
+    </select>
+
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siyueli.platform.service.member.server.mapper.coupon.CouponTaskMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.siyueli.platform.member.pojo.coupon.CouponTask">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type_id" property="typeId"/>
+        <result column="status_id" property="statusId"/>
+        <result column="start_at" property="startAt"/>
+        <result column="end_at" property="endAt"/>
+        <result column="valid_time_start_at" property="validTimeStartAt"/>
+        <result column="valid_time_end_at" property="validTimeEndAt"/>
+        <result column="receipt_start_day" property="receiptStartDay"/>
+        <result column="receipt_end_day" property="receiptEndDay"/>
+        <result column="receipt_limit" property="receiptLimit"/>
+        <result column="stock_qty" property="stockQty"/>
+        <result column="share_activity" property="shareActivity"/>
+        <result column="share_club_card" property="shareClubCard"/>
+        <result column="scope" property="scope"/>
+        <result column="threshold" property="threshold"/>
+        <result column="discount" property="discount"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <resultMap id="TaskWithChannelsResultMap" type="com.siyueli.platform.member.pojo.coupon.CouponTask">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type_id" property="typeId"/>
+        <result column="status_id" property="statusId"/>
+        <result column="start_at" property="startAt"/>
+        <result column="end_at" property="endAt"/>
+        <result column="valid_time_start_at" property="validTimeStartAt"/>
+        <result column="valid_time_end_at" property="validTimeEndAt"/>
+        <result column="receipt_start_day" property="receiptStartDay"/>
+        <result column="receipt_end_day" property="receiptEndDay"/>
+        <result column="receipt_limit" property="receiptLimit"/>
+        <result column="stock_qty" property="stockQty"/>
+        <result column="share_activity" property="shareActivity"/>
+        <result column="share_club_card" property="shareClubCard"/>
+        <result column="scope" property="scope"/>
+        <result column="threshold" property="threshold"/>
+        <result column="discount" property="discount"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <collection property="channelList"
+                    ofType="Integer"
+                    javaType="list">
+            <result column="channel_id"/>
+        </collection>
+    </resultMap>
+
+
+    <update id="updateByStatus">
+        UPDATE `coupon_task`
+        SET `status_id` = #{updateStatus}
+        WHERE `id` = #{taskId} AND `status_id` = #{currentStatus}
+    </update>
+    <update id="updateByStockQty">
+        UPDATE `coupon_task`
+        SET `coupon_task`.`stock_qty` = #{updateQty}
+        where `coupon_task`.`id` = #{id} AND `coupon_task`.`stock_qty` = #{currentQty}
+    </update>
+    <select id="selectTaskPage" resultMap="TaskWithChannelsResultMap">
+        SELECT
+        `task`.*,
+        `channel_id`
+        FROM `coupon_task` AS `task`,
+        (SELECT id
+        FROM `coupon_task`
+        <where>
+            `coupon_task`.`is_deleted` = 0
+            <if test="request.getName() != null">
+                <bind name="nameLike" value="'%' + request.getName() + '%'"/>
+                AND `coupon_task`.`name` LIKE #{nameLike}
+            </if>
+            <if test="request.getTypeId() != null">
+                AND `coupon_task`.`type_id` = #{request.typeId}
+            </if>
+        </where>
+        <if test="limit != null and offset != null">
+            LIMIT #{limit} OFFSET #{offset}
+        </if>
+        ) `temp`
+        LEFT JOIN `coupon_task_channel` ON `temp`.`id` = `coupon_task_channel`.`coupon_task_id`
+        WHERE `task`.`id` = `temp`.`id`
+        ORDER BY `task`.`id` DESC
+    </select>
+
+</mapper>

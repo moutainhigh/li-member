@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siyueli.platform.service.member.server.mapper.member.MemberRightsMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.siyueli.platform.member.pojo.rights.MemberRights">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="type" property="type" />
+        <result column="status" property="status" />
+        <result column="remarks" property="remarks" />
+        <result column="trigger_condition" property="triggerCondition" />
+        <result column="rights_content" property="rightsContent" />
+        <result column="create_at" property="createAt" />
+    </resultMap>
+
+
+    <select id="getRightsByGradeId" resultMap="BaseResultMap">
+        SELECT * FROM `member_rights` rights
+        WHERE rights.id IN
+            (SELECT rg.rights_id FROM `member_rights_grade` rg WHERE rg.grade_id=#{gradeId})
+    </select>
+
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siyueli.platform.service.member.server.mapper.coupon.CouponMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.siyueli.platform.member.pojo.coupon.Coupon">
+        <id column="id" property="id" />
+        <result column="task_id" property="taskId" />
+        <result column="task_type_id" property="taskTypeId" />
+        <result column="code" property="code" />
+        <result column="card_coupon_id" property="cardCouponId" />
+        <result column="member_id" property="memberId" />
+        <result column="order_no" property="orderNo" />
+        <result column="source" property="source" />
+        <result column="status_id" property="statusId" />
+        <result column="receipt_at" property="receiptAt" />
+        <result column="use_at" property="useAt" />
+        <result column="valid_time_start_at" property="validTimeStartAt" />
+        <result column="valid_time_end_at" property="validTimeEndAt" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siyueli.platform.service.member.server.mapper.paymentcode.PaymentCodeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.siyueli.platform.member.pojo.paymentcode.PaymentCode">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="payment_code" property="paymentCode" />
+        <result column="order_no" property="orderNo" />
+        <result column="amount" property="amount" />
+        <result column="valid_time" property="validTime" />
+        <result column="is_used" property="isUsed" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+</mapper>

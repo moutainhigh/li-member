@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siyueli.platform.service.member.server.mapper.member.MemberUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.siyueli.platform.member.pojo.member.MemberUser">
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="cellphone" property="cellphone" />
+        <result column="grade_id" property="gradeId" />
+        <result column="create_at" property="createAt" />
+        <result column="register_channel" property="registerChannel" />
+        <result column="unnit_id" property="openId" />
+        <result column="car_num" property="carNum" />
+        <result column="birthday" property="birthday" />
+        <result column="password" property="password" />
+        <result column="status" property="status" />
+        <result column="identity_id" property="identityId" />
+        <result column="email" property="email" />
+        <result column="balance" property="balance" />
+        <result column="donate_balance" property="donateBalance" />
+        <result column="deposite" property="deposite" />
+        <result column="points" property="points" />
+        <result column="update_at" property="updateAt" />
+    </resultMap>
+
+
+    <update id="addBalanceAndPoints">
+        UPDATE member_user
+        SET
+        <if test="#{balanceInfo.balance} != null">
+            balance = IFNULL(balance, 0) + #{balanceInfo.balance},
+        </if>
+        <if test="#{balanceInfo.points} != null">
+            points = IFNULL(points, 0) + #{balanceInfo.points},
+        </if>
+        update_at = #{balanceInfo.updateAt}
+        WHERE id = #{id}
+    </update>
+
+    <resultMap id="searchAllUserResultMap" type="com.siyueli.platform.member.pojo.member.MemberUser">
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="grade_name" property="gradeName" />
+        <result column="cellphone" property="cellphone" />
+        <result column="grade_id" property="gradeId" />
+        <result column="create_at" property="createAt" />
+        <result column="register_channel" property="registerChannel" />
+        <result column="unnit_id" property="openId" />
+        <result column="car_num" property="carNum" />
+        <result column="birthday" property="birthday" />
+        <result column="password" property="password" />
+        <result column="status" property="status" />
+        <result column="identity_id" property="identityId" />
+        <result column="email" property="email" />
+        <result column="balance" property="balance" />
+        <result column="donate_balance" property="donateBalance" />
+        <result column="deposite" property="deposite" />
+        <result column="points" property="points" />
+        <result column="update_at" property="updateAt" />
+    </resultMap>
+
+    <select id="searchAllUser" resultMap="searchAllUserResultMap">
+        select muser.*,grade.name as grade_name from member_user muser left join member_grade grade on muser.grade_id=grade.id
+        <where>
+            <if test="request !=null and request.getCode() != null">
+                `muser`.`code` = #{request.code}
+            </if>
+            <if test="request !=null and request.getGradeId() != null">
+                AND `muser`.`grade_id` = #{request.gradeId}
+            </if>
+            <if test="request !=null and request.getCellphone() != null">
+                <bind name="cellphoneLike" value="'%' + request.getCellphone() + '%'"/>
+                AND `muser`.`cellphone` LIKE #{cellphoneLike}
+            </if>
+            <if test="request !=null and request.getRegisterTime() != null">
+                AND `muser`.`create_at` &gt;= #{registerTimeBefore}
+                AND `muser`.`create_at` &lt;= #{registerTimeAfter}
+            </if>
+        </where>
+        ORDER BY `muser`.`id` DESC
+        <if test="limit != null and offset != null">
+            LIMIT #{limit} OFFSET #{offset}
+        </if>
+    </select>
+
+</mapper>

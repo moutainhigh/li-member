@@ -1,0 +1,59 @@
+spring:
+  profiles:
+    active: production
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+  redis:
+      timeout: 5000
+      commandTimeout: 5000
+      jedis:
+         pool:
+           max-active: 8
+           min-idle: 0
+           max-idle: 8
+           max-wait: 1000
+      cluster:
+            nodes: 127.0.0.1:7001,127.0.0.1:7002,127.0.0.1:7003,127.0.0.1:7004,127.0.0.1:7005,127.0.0.1:7006
+  flyway:
+    enabled: true
+    ignore-missing-migrations: true
+    out-of-order: true
+    validate-on-migrate: true
+  zipkin:
+    base-url: http://localhost:8006
+
+mybatis-plus:
+  mapper-locations: classpath:/com/siyueli/platform/service/member/server/mapper/**/xml/*Mapper.xml
+  global-config:
+      id-type: 0
+      field-strategy: 2
+      db-column-underline: true
+      refresh-mapper: true
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+  configuration:
+      map-underscore-to-camel-case: true
+      cache-enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+# 微信公众号配置
+wechat:
+  mp:
+    appId: appId
+    secret: appsecret
+    token: token
+    aesKey: aeskey
+

@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: siyueli-member-service
+  datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:mysql://localhost:3306/siyueli-platform?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: root
+        hikari:
+          connection-timeout: 5000
+          maximum-pool-size: 25
+server:
+  port: 7013
+
+weixin:
+  miniprogram:
+    appid:
+    secret:
+    key:
+    grant_type: authorization_code
+    url: https://api.weixin.qq.com/sns/jscode2session
+    mch_id:
+    recharge_notify_url: /payment/rechargeNotify
+
+sms:
+  uri_send_sms: https://sms.yunpian.com/v2/sms/single_send.json
+  apikey:
+member:
+  api_url: https://www.sipin.com/dev/siyueli/api/member
+  recharge_award_points: 100
+  aes_key: RxPXACQqepQrdy4e/HqMyw==
+  md5_key: RxPXACQqepQrdy4e/HqMyw==
+enjoycrm:
+  service_url: http://10.0.30.119:8200/Enjoy/Service
+  userno: 0260d2c7-feb9-408d-8a64-d419a37f8056
+  key: 57965955
+
+logging:
+  config: classpath:logback-spring.xml
+  path: /Users/admin/Workspace/logs3
+  contextName: siyueli
+  appDir: siyueli

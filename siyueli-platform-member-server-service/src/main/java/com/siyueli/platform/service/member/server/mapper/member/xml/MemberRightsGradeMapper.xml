@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siyueli.platform.service.member.server.mapper.member.MemberRightsGradeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.siyueli.platform.member.pojo.rights.MemberRightsGrade">
+        <id column="id" property="id" />
+        <result column="rights_id" property="rightsId" />
+        <result column="grade_id" property="gradeId" />
+        <result column="create_at" property="createAt" />
+    </resultMap>
+</mapper>

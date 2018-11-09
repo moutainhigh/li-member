@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siyueli.platform.service.member.server.mapper.activity.ActivityUserCouponMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.siyueli.platform.member.pojo.activity.ActivityUserCoupon">
+        <id column="id" property="id" />
+        <result column="role_id" property="roleId" />
+        <result column="coupon_id" property="couponId" />
+        <result column="user_id" property="userId" />
+        <result column="create_at" property="createAt" />
+    </resultMap>
+
+</mapper>

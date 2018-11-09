@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siyueli.platform.service.member.server.mapper.CustomFieldOptionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.siyueli.platform.member.pojo.customform.CustomFieldOption">
+        <id column="id" property="id" />
+        <result column="field_id" property="fieldId" />
+        <result column="field_value" property="fieldValue" />
+        <result column="show_type" property="showType" />
+        <result column="update_at" property="updateAt" />
+        <result column="create_at" property="createAt" />
+    </resultMap>
+
+</mapper>

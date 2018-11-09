@@ -1,0 +1,20 @@
+{
+  "strCustomerNo": "",
+  "strCardNo": "80000004",
+  "strName": "测试",
+  "strSex": "男",
+  "dtBirthDay": "2018-1-1",
+  "strIdType": "身份证",
+  "strID": "3311111111111111111",
+  "strAddress": "济南",
+  "strPostCode": "1112",
+  "strTelePhone": "04709999999",
+  "strMobile": "15253119999",
+  "strGroup": "100035",
+  "strJob": "测试",
+  "strCorp": "测试",
+  "strEducation": "2、高中/中专",
+  "strPUserno": "",
+  "strEmail": "",
+  "strFond": ""
+}

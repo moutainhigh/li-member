@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siyueli.platform.service.member.server.mapper.member.MemberOperatorMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.siyueli.platform.member.pojo.member.MemberOperator">
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="grade_id" property="gradeId" />
+        <result column="cellphone" property="cellphone" />
+        <result column="mobile" property="mobile" />
+        <result column="identity_id" property="identityId" />
+        <result column="email" property="email" />
+        <result column="password" property="password" />
+        <result column="address" property="address" />
+        <result column="status" property="status" />
+        <result column="create_at" property="createAt" />
+        <result column="update_at" property="updateAt" />
+    </resultMap>
+
+</mapper>
